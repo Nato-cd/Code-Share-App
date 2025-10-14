@@ -1,12 +1,12 @@
-const express = require("express");
-const cors = require("cors");
+import express, { json } from "express";
+import cors from "cors";
 
 const app = express();
 const port = 3001;
 
 
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 const snippetsArray = [];
 
