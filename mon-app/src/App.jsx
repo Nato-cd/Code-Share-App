@@ -61,7 +61,18 @@ export default function App(){
       ))}
     </div>
   );
-};
+ };
+
+ const createSnippet = () => {
+  const [mySnippet, setMySnippet] = useState({});
+
+  useEffect(() => {
+    fetch("http://localhost:3001/test")
+    .then((response) => response.json())
+    .then((mySnippet) => setMySnippet(mySnippet))
+    .catch((error) => console.error("Error:", error));
+  }, []);
+ }
 }
  
 
