@@ -63,19 +63,35 @@ export default function App(){
   );
  };
 
+ 
  const createSnippet = () => {
   const [mySnippet, setMySnippet] = useState({});
-
-  useEffect(() => {
-    fetch("http://localhost:3001/test")
-    .then((response) => response.json())
-    .then((mySnippet) => setMySnippet(mySnippet))
-    .catch((error) => console.error("Error:", error));
-  }, []);
+  const fetchPar = {
+    method: 'POST',
+    header: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(mySnippet)
+  };
+  fetch("http://localhost:3001/test", fetchPar)
+  .then(() => {
+    return fetch("http://localhost:3001/snippets");
+  })
+ .then (res => res.json())
+ .then(data => {
+  console.log("snippet côté frond:", data);
+ })
+ .catch(err => console.log(err))
  }
 }
  
+const userRandomId = () =>{
+  const [randomId, setRandomId] = useState("");
+    const number = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
+    setRandomId(number);
 
-
-
-
+};
+function textTemplate(){
+  return <textarea defaultValue={`function Hello(){
+    console.log('Hello Worl')};`}></textarea>
+  }
