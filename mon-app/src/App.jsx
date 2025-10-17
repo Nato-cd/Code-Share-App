@@ -94,4 +94,4 @@ const userRandomId = () =>{
 function textTemplate(){
   return <textarea defaultValue={`function Hello(){
     console.log('Hello Worl')};`}></textarea>
-  }
+  };
