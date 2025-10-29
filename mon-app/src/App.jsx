@@ -3,23 +3,54 @@ import { useEffect, useState }from "react";
 
 
 export default function App(){
-  const [snippetsId, setSnippetId ]= useState([]);
-const generateId = () => {
+    const [snippetsId, setSnippetId] = useState([]);
+  const generateId = () => {
   const number = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
  setSnippetId(prev => [...prev, number]);
  console.log(snippetsId);
 };
+
+  const [snippetsVal, setSnippetVal] = useState();
+  const [inputVals, setInputVal] = useState();
+  const [mySnippet, setMySnippet] = useState({});
+  const [randomIds, setMyRandomId] = useState([]);
+
+
+
+  const createSnippet = () => {
+      setMyRandomId = ((prevItems) => [...prevItems])
+      setMySnippet.value = inputVals;
+
+      const fetchPar = {
+          method: "POST",
+          header: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify(mySnippet),
+      };
+      fetch("http://localhost:3001/test", fetchPar)
+      .then(() => {
+          return fetch("http://localhost:3001/snippets");
+      })
+      .then((res) => res.json())
+      .then((data) => {
+          console.log("snippet côté frond:", data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+
 return(
   <>
     <div>
       <textarea defaultValue={`function Hello(){
-//       console.log('Hello Worl')};`}></textarea>
+//       console.log('Hello World')};`}></textarea>
     </div>
     <div>
+      <input onChange={e => setInputVal(e.target.value)}></input>
       <button onClick={generateId}>Click</button>
     </div>
   </>
-  
 )
 };
 //  const AutoResizeTextareas = () => {
@@ -84,25 +115,7 @@ return(
  
 
 
-//  const createSnippet = () => {
-//   const [mySnippet, setMySnippet] = useState({});
-//   const fetchPar = {
-//     method: 'POST',
-//     header: {
-//         "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify(mySnippet)
-//   };
-//   fetch("http://localhost:3001/test", fetchPar)
-//   .then(() => {
-//     return fetch("http://localhost:3001/snippets");
-//   })
-//  .then (res => res.json())
-//  .then(data => {
-//   console.log("snippet côté frond:", data);
-//  })
-//  .catch(err => console.log(err))
-//  }
+
 
 
 
